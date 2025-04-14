@@ -1,0 +1,22 @@
+<odoo>
+    <record id="artemis_checklists_inherit_res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">artemis.checklists.inherit.res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="industry_fsm.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='fsm_tasks_management']" position="after">
+                <block title="Checklists" id="checklist_management">
+                    <setting id="checklist_setting">
+                        <h6>
+                            <small>Configure your checklists here !</small>
+                        </h6>
+                        <div class="mt8" groups="base.group_no_one">
+                            <button name="%(checklist_action)d" icon="oi-arrow-right" type="action"
+                                    string="Checklists" class="btn-link"/>
+                        </div>
+                    </setting>
+                </block>
+            </xpath>
+        </field>
+    </record>
+</odoo>

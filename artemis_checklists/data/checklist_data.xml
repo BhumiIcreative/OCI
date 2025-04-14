@@ -1,0 +1,60 @@
+<odoo noupdate="1">
+    <!-- Checklist 1 -->
+    <record id="checklist_1" model="fsm.checklist">
+        <field name="name">Intrusion Detection</field>
+    </record>
+    <record id="checklist_1_checklist_item_1" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_1"/>
+        <field name="name">Volume Control</field>
+        <field name="checklist_type">good/na/bad</field>
+        <field name="field_ttype">selection</field>
+    </record>
+    <record id="checklist_1_checklist_item_2" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_1"/>
+        <field name="name">Opening Detector Check</field>
+        <field name="checklist_type">good/na/bad</field>
+        <field name="field_ttype">selection</field>
+    </record>
+    <!-- Checklist 2 -->
+    <record id="checklist_2" model="fsm.checklist">
+        <field name="name">Video Surveillance</field>
+    </record>
+    <record id="checklist_2_checklist_item_1" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_2"/>
+        <field name="name">Installation (mA)</field>
+        <field name="checklist_type">installation</field>
+        <field name="field_ttype">integer</field>
+    </record>
+    <record id="checklist_2_checklist_item_2" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_2"/>
+        <field name="name">Load (mA)</field>
+        <field name="checklist_type">load</field>
+        <field name="field_ttype">float</field>
+    </record>
+    <record id="checklist_2_checklist_item_3" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_2"/>
+        <field name="name">Consumption (mA)</field>
+        <field name="checklist_type">load</field>
+        <field name="field_ttype">float</field>
+    </record>
+    <!-- Checklist 3 -->
+    <record id="checklist_3" model="fsm.checklist">
+        <field name="name">Access Control</field>
+    </record>
+    <record id="checklist_3_checklist_item_1" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_3"/>
+        <field name="name">Access Control Check</field>
+        <field name="checklist_type">good/na/bad</field>
+        <field name="field_ttype">selection</field>
+    </record>
+    <!-- Checklist 4 -->
+    <record id="checklist_4" model="fsm.checklist">
+        <field name="name">Fire Detection</field>
+    </record>
+    <record id="checklist_4_checklist_item_1" model="fsm.checklist.item">
+        <field name="checklist_id" ref="checklist_4"/>
+        <field name="name">Camera Adjustment Check</field>
+        <field name="checklist_type">good/na/bad</field>
+        <field name="field_ttype">selection</field>
+    </record>
+</odoo>
