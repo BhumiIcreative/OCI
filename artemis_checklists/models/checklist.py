@@ -14,6 +14,7 @@ class ChecklistItemValue(models.Model):
     _name = 'fsm.checklist.item.value'
     _description = 'Checklist Value'
 
+
     task_id = fields.Many2one('project.task')
     item_id = fields.Many2one('fsm.checklist.item', string="Checklist Item")
     valuefield_ttype = fields.Selection(related='item_id.field_ttype', store=True)
@@ -22,6 +23,13 @@ class ChecklistItemValue(models.Model):
     float_value = fields.Float()
     checklist_id = fields.Many2one('fsm.checklist', string="Checklist")
 
+    name = fields.Char()
+    display_type = fields.Selection(
+        selection=[
+            ('line_section', "Section"),
+            ('line_item', "Item"),
+        ],
+        default=False)
 
 
 class ChecklistItem(models.Model):

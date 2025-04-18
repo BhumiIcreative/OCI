@@ -10,13 +10,19 @@
     'depends': ['industry_fsm'],
     'data': [
         "data/checklist_data.xml",
+        "data/report_paperformate_data.xml",
         "security/ir.model.access.csv",
+        "reports/checklists_report.xml",
         "views/checklist_views.xml",
         "views/res_config_settings_views.xml",
         "views/project_task_views.xml",
-
-
+        "views/report_intervention_training.xml",
     ],
+    'assets': {
+        'web.assets_backend': [
+            'artemis_checklists/static/src/scss/*',
+        ]
+    },
     'installable': True,
     'application': False,
     'auto_install': False,

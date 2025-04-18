@@ -1,0 +1,473 @@
+<odoo>
+    <template id="intervention_and_training_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+
+                    <div class="page page_style">
+                        <div class="oe_structure"></div>
+                        <div class="row ">
+                            <t t-if="not o" t-set="o" t-value="doc"/>
+                            <t t-if="not company">
+                                <t t-if="company_id">
+                                    <t t-set="company" t-value="company_id"/>
+                                </t>
+                                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                                </t>
+                                <t t-else="else">
+                                    <t t-set="company" t-value="res_company"/>
+                                </t>
+                            </t>
+                            <div class="col-4 text-center company_info border_bottom">
+                                <img t-if="company.logo" class="o_company_logo company_logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                                <div class="mt-2 text-center small">
+                                    <span t-field="company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                    <hr style="margin:0px;"/>
+                                    Tel:
+                                    <t t-esc="company.phone"/>
+                                    <br/>
+                                    Fax: 04 72 04 94 61
+                                </div>
+                            </div>
+                            <div class="col-8">
+                                <div class="row ">
+                                    <div class="col-8  p-2 first_row border_bottom"
+                                    >
+                                        <label class="text-start form-label fw-bold">NOM CLIENT:</label>
+                                    </div>
+                                    <div class="col-4  p-2 border_bottom">
+                                        <label class="form-label fw-bold">DATE:</label>
+                                    </div>
+                                </div>
+                                <div class="row ">
+                                    <div class="col-12  pt-2 pb-5 text-start border_bottom start_margin"
+                                    >
+                                        ADRESSE:
+                                    </div>
+                                </div>
+                                <div class="row border_top" style="background-color:#bab7b6;">
+                                    <div class="col-12 d-flex align-items-center start_margin" style="height:87px;">
+                                        <span class="fw-bold">PROCES VERBAL DE :</span>
+                                        <p style="padding-top:20px;margin-left:50px;">
+                                            <span class="square"
+                                            />
+                                            MISE EN SERVICE
+                                            <br/>
+                                            <span class="square"
+                                            />
+                                            RECEPTION
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <table class="table">
+                            <tr>
+                                <td colspan="3">
+                                    <table class="table">
+                                        <tr style="height:85px;">
+                                            <td style="width:37%;padding-top:20px;padding-bottom:8px;"><span>N° de
+                                                DEVIS:</span>&amp;nbsp;
+                                                <span class="border_bottom"
+                                                      style="display: inline-block;  width: 190px;"/>
+                                            </td>
+                                            <td style="width:33.33%;padding-top:20px;padding-bottom:8px;"><span>N° de
+                                                CLIENT:</span>&amp;nbsp;
+                                                <span class="border_bottom"
+                                                      style="display: inline-block;  width: 190px;"/>
+                                            </td>
+                                            <td style="width:33.33%;vertical-align: top;">SIGNATURE DU RESPONSABLE DE
+                                                SERVICE (Après retour
+                                                dossier)
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" style="padding-top:0px;">
+                                    <p>CHANTIER RECEPTIONNE POUR ARTEMIS PAR:
+                                        <span class="border_bottom" style="display: inline-block;  width: 500px;"/>
+                                    </p>
+
+                                    <p>CHANTIER RECEPTIONNE POUR LE CLIENT PAR:
+                                        <span class="border_bottom" style="display: inline-block;  width: 500px;"/>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="row p-2">
+                                        <div class="col-3" style="max-width:180px;"><span>INSTALLATION DE:</span>&amp;nbsp;&amp;nbsp;
+                                        </div>
+                                        <div class="col-3" style="max-width:max-content;padding-right:40px;">
+                                            <p>DETECTION IN TRUSION:</p>
+                                            <p>CONTROLE D'ACCES:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width:20px;">
+                                            <p>
+                                                <span class="square"/>
+                                            </p>
+                                            <p>
+                                                <span class="square"/>
+                                            </p>
+                                        </div>
+                                        <div class="col-3" style="max-width: max-content;">
+                                            <p>DETECTION INCENDIE:</p>
+                                            <p>PRODUITS ASSOCIES:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 20px;">
+                                            <p>
+                                                <span class="square"/>
+                                            </p>
+                                            <p>
+                                                <span class="square"/>
+                                            </p>
+                                        </div>
+                                        <div class="col-2" style="width:177px;">
+                                            <span>SURVEILLANCE VIDEO:
+                                            </span>
+                                        </div>
+                                        <div class="col" style="max-width:20px;padding-right:20px;">
+                                            <p>
+                                                <span class="square"/>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="row p-1">
+                                        <div>
+                                            <p style="margin: 0; padding: 0;text-align: center;">L'INSTALLATION EST
+                                                CONFORME
+                                                AU
+                                                DEVIS REFERENCE CI-DESSUS.
+                                            </p>
+                                            <p style="margin: 0; padding: 0;text-align: center;">LES ESSAIS FONCTIONNELS
+                                                ONT
+                                                ETE
+                                                REALISES.
+                                            </p>
+                                            <p style="margin: 0; padding: 0;text-align: center;">L'UTILISATEUR A ETE
+                                                INFORME
+                                                DE
+                                                SES OBLIGATIONS ET A RECU:
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">OUI
+                                        </div>
+                                        <div style="max-width: 59px;margin: 0px;"
+                                             class="col-1">NON
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">SO
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>LA NOTICE D'UTILISATION DES APPAREILLAGES:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>LE DOSSIER TECHNIQUE:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>LA PROPOSITION D'UN CONTRAT D'ENTRETIEN:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>LE CARNET D'ENTRETIEN:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>AGREMENT @CYBER NIVEAU 3:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                        <div style="max-width:40px;"/>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6">
+                                            <p>ARCHITECTURE CYBER DE L'INSTALLATION:</p>
+                                        </div>
+                                        <div class="col-1" style="max-width: 56px;">
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                        </div>
+                                        <div style="max-width:90px;">NIVEAU</div>
+                                        <div style="max-width:40px;">1</div>
+                                        <div style="max-width:40px;">2</div>
+                                        <div style="max-width:40px;">3</div>
+                                        <div style="max-width:40px;">4</div>
+                                    </div>
+                                    <div class="row p-2">
+                                        <div class="col-6"/>
+                                        <div class="col-1" style="max-width: 56px;">
+                                        </div>
+                                        <div style="max-width: 59px;" class="col-1">
+                                        </div>
+                                        <div style="max-width: 57px;" class="col-1">
+                                        </div>
+                                        <div style="max-width:90px;"/>
+                                        <div style="max-width:40px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:40px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:40px;">
+                                            <span class="square"/>
+                                        </div>
+                                        <div style="max-width:40px;">
+                                            <span class="square"/>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="p-2">
+                                    <span>LA GARANTIE TEL QUE SPECIFIEE DANS LES CONDITIONS DE VENTE DE L'INSTALLATEUR
+                                        PREND
+                                        EFFET A
+                                        <br/>
+                                        COMPTER DU:
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="row">
+                                        <div class="col-6 start_margin">
+                                            <p>FAIT A:</p>
+                                            <p>LE:</p>
+                                        </div>
+                                        <div class="col-6" style="border-left:1px solid black;">
+                                            <p>SIGNATURE DE L'INSTALLATEUR:</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
+                                    <div class="row">
+                                        <div class="col-6 start_margin" style="padding-bottom: 85px;">
+                                            <p>OBSERVATION:</p>
+                                        </div>
+                                        <div class="col-6 start_margin"
+                                             style="border-left:1px solid black;padding-bottom: 85px;">
+                                            <p>SIGNATURE DU CLIENT:</p>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="page page_style" style="page-break-before:always;">
+                        <div class="row ">
+                            <div class="oe_structure"></div>
+                            <t t-if="not o" t-set="o" t-value="doc"/>
+                            <t t-if="not company">
+                                <t t-if="company_id">
+                                    <t t-set="company" t-value="company_id"/>
+                                </t>
+                                <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                    <t t-set="company" t-value="o.company_id.sudo()"/>
+                                </t>
+                                <t t-else="else">
+                                    <t t-set="company" t-value="res_company"/>
+                                </t>
+                            </t>
+
+                            <div class="col-4 text-center company_info border_bottom"
+                            >
+                                <img t-if="company.logo" class="o_company_logo company_logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                                <div class="mt-2 text-center small">
+                                    <span t-field="company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                    <hr style="margin:0px;"/>
+                                    Tel:
+                                    <t t-esc="company.phone"/>
+                                    <br/>
+                                    Fax: 04 72 04 94 61
+                                </div>
+                            </div>
+
+                            <div class="col-8">
+                                <div class="row  ">
+                                    <div class="col-8  p-2 first_row border_bottom">
+                                        <label class="text-start form-label fw-bold">NOM CLIENT:</label>
+                                    </div>
+                                    <div class="col-4  p-2 border_bottom">
+                                        <label class="form-label fw-bold">DATE:</label>
+                                    </div>
+                                </div>
+
+                                <div class="row ">
+                                    <div class="col-12  pt-2 pb-5 border_bottom start_margin">
+                                        <label class="text-start form-label fw-bold">ADRESSE:</label>
+                                    </div>
+                                </div>
+                                <div class="row pb-5 border_top verbal_de">
+                                    <h4 style="margin: 0;">
+                                        <strong>PROCES VERBAL DE FORMATION</strong>
+                                    </h4>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table">
+                            <tr>
+                                <td colspan="3">
+                                    <table style="width:100%; border-collapse: collapse;">
+                                        <tr style="height:100px;">
+                                            <td style="width:37%; padding-top:42px; padding-bottom:8px;">
+                                                <span>N° de CLIENT</span>
+                                                <span class="border_bottom"
+                                                      style="display:inline-block; width: 190px;"/>
+                                            </td>
+
+                                            <td style="width:63%; padding-bottom:8px; vertical-align: top;">
+                                                <span>SIGNATURE DU RESPONSABLE DE SERVICE (Après retour dossier)</span>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td colspan="2" class="p-2">
+                                    <p>FORMATION EFFECTURE POUR ARTEMIS PAR:</p>
+                                </td>
+                            </tr>
+                            <tr style="border-top:1px solid black;">
+                                <td colspan="2">
+                                    <h4>
+                                        <strong>
+                                            <center>INSTALLATION DE</center>
+                                        </strong>
+                                    </h4>
+                                </td>
+                            </tr>
+                            <tr style="border-top:1px solid black;" class="text-center">
+                                <td colspan="2">
+                                    <p>LES PERSONNES MENTIONNEES CLOESSOUS ATTESTENT AVOIR RECU UNE FORMATION SUR
+                                        L'EXPLOITATION
+                                        DU SYSTEME DE SECURITE EN DATE DU
+                                    </p>
+                                </td>
+                            </tr>
+
+                        </table>
+
+                        <div class="row" style="border-top:1px solid black;">
+                            <div class="col-6" style="border-right:1px solid black;">
+                                <center>NOMS DES PERSONNES FORMEES</center>
+                            </div>
+                            <div class="col-6">
+                                <center>SIGNATURE</center>
+                            </div>
+                        </div>
+                        <div class="row" style="border-top:1px solid black;">
+                            <div class="col-6" style="padding-bottom:70%;border-right:1px solid black;">
+
+                            </div>
+                            <div class="col-6" style="padding-bottom:70%;">
+
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

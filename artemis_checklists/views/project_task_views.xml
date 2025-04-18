@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='extra_info']" position="after">
                 <page name="checklist" string="Checklists">
-                    <div class="d-lg-flex"> <!-- These two div are used to position org_chart -->
+                    <div class="d-lg-flex">
                         <div class="col-lg-3 px-0 pe-lg-0">
                             <group string="Checklists">
                                 <field name="checklist_ids" widget="many2many_checkboxes"/>
@@ -14,34 +14,43 @@
                         </div>
                         <div class="flex-grow-1">
                             <group string="Checklist Items">
-                                <field name="visible_line_ids" nolabel="1">
-                                    <list editable="bottom">
+                                <field name="visible_line_ids" widget="product_label_section_and_note_field_o2m"
+                                       context="{'default_display_type': 'line_item'}">
+                                    <list editable="bottom" string="Journal Items">
+                                        <control>
+                                            <create name="add_line_control" string="Add a line"/>
+                                            <create name="add_section_control" string="Add a section"
+                                                    context="{'default_display_type': 'line_section'}"/>
+                                        </control>
                                         <field name="item_id"/>
-                                        <field name="valuefield_ttype" column_invisible='True'/>
-                                        <field name="selection_value" readonly="valuefield_ttype != 'selection'"/>
+                                        <field name="name" widget="section_and_note_text" optional="show"/>
+                                        <field name="display_type" force_save="1" column_invisible="True"/>
+                                         <field name="selection_value" readonly="valuefield_ttype != 'selection'"/>-->
                                         <field name="integer_value" readonly="valuefield_ttype != 'integer'"/>
                                         <field name="float_value" readonly="valuefield_ttype != 'float'"/>
                                     </list>
                                 </field>
+<!--                                <field name="visible_line_ids" nolabel="1" widget="section_and_note_one2many">-->
+<!--                                    <list editable="bottom">-->
+<!--                                        <control>-->
+<!--                                            <create name="add_line_control" string="Add a line"-->
+<!--                                                    context="{'default_display_type': 'line_item'}"/>-->
+<!--                                            <create name="add_section_control" string="Add a section"-->
+<!--                                                    context="{'default_display_type': 'line_section'}"/>-->
+
+<!--                                        </control>-->
+<!--                                        <field name="display_type" column_invisible="1"/>-->
+<!--                                        <field name="item_id"/>-->
+<!--                                        <field name="name"/>-->
+<!--                                        <field name="valuefield_ttype" column_invisible='True'/>-->
+<!--                                        <field name="selection_value" readonly="valuefield_ttype != 'selection'"/>-->
+<!--                                        <field name="integer_value" readonly="valuefield_ttype != 'integer'"/>-->
+<!--                                        <field name="float_value" readonly="valuefield_ttype != 'float'"/>-->
+<!--                                    </list>-->
+<!--                                </field>-->
                             </group>
                         </div>
                     </div>
-                    <!--                    <group>-->
-                    <!--                        <group style="max-width: 290px;">-->
-                    <!--                            <field name="checklist_ids" widget="many2many_checkboxes"/>-->
-                    <!--                        </group>-->
-                    <!--                        <group style="max-width: 3000px;"  class="d-lg-flex">-->
-                    <!--                            <field name="visible_line_ids" nolabel="1">-->
-                    <!--                                <list editable="bottom">-->
-                    <!--                                    <field name="item_id"/>-->
-                    <!--                                    <field name="valuefield_ttype" column_invisible='True'/>-->
-                    <!--                                    <field name="selection_value" readonly="valuefield_ttype != 'selection'"/>-->
-                    <!--                                    <field name="integer_value" readonly="valuefield_ttype != 'integer'"/>-->
-                    <!--                                    <field name="float_value" readonly="valuefield_ttype != 'float'"/>-->
-                    <!--                                </list>-->
-                    <!--                            </field>-->
-                    <!--                        </group>-->
-                    <!--                    </group>-->
                 </page>
             </xpath>
         </field>
