@@ -1,0 +1,582 @@
+<odoo>
+    <template id="fire_detection_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page border">
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+                        <t t-if="not company">
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                <t t-set="company" t-value="o.company_id.sudo()"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>
+                        <!-- Header -->
+                        <div class="row custom_header2">
+                            <div class="col-3 border-end custom_font" style="text-align:center; vertical-align:top;">
+                                <img t-if="company.logo" class="o_company_logo  logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                                <br/>
+                                <br/>
+                                <div class="text-center small">
+                                    <span t-field="company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                    Tel:
+                                    <t t-esc="company.phone"/>
+                                    <br/>
+                                    Fax: 04 72 04 94 61
+                                </div>
+                            </div>
+                            <div class="col-9 custom_font">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>NOM DU CLIENT:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.name"/>
+                                    </div>
+                                    <div class="col-6">
+                                        <span>
+                                            <strong>DATE:</strong>
+                                        </span>
+                                        <t t-esc="o.planned_date_begin.date()"/>
+                                    </div>
+                                </div>
+                                <div class="row" style="padding:8px 8px 8px 30px; ">
+                                    <div class="col-3">
+                                        <span>
+                                            <strong>N°</strong>
+                                        </span>
+                                        <t t-esc="o.id"/>
+                                    </div>
+                                    <div class="col">
+                                        <span>
+                                            <strong>RUE:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.street"/>
+                                        <t t-esc="o.partner_id.street2"/>
+                                    </div>
+                                </div>
+                                <div class="row border-bottom custom_font13" style="padding:8px 8px 8px 40px; ">
+                                    <div class="col-2">
+                                        <span>
+                                            <strong>CP:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.zip"/>
+                                    </div>
+                                    <div class="col-3">
+                                        <span>
+                                            <strong>VILLE:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.city"/>
+                                    </div>
+
+                                     <div class="col text-center">
+                                        <span>
+                                            <strong>N° CLIENT:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.phone"/>
+                                    </div>
+                                </div>
+                                <div class="row border-bottom custom_font"
+                                     style=" display: flex; flex-wrap: nowrap;">
+                                    <div class="col border-end header_info ">
+                                        <div style="max-width:max-content">d’intervention</div>
+                                        <br/>
+                                    </div>
+                                    <div class="col border-end header_info">
+                                        <div style="max-width:max-content" class="border-bottom">V.entretien</div>
+                                        <div>
+                                            <p/>
+                                        </div>
+                                    </div>
+                                    <div class="col border-end header_info">
+                                        <div style="max-width:max-content" class="border-bottom">Dépannage</div>
+                                        <div>
+                                            <p/>
+                                        </div>
+                                    </div>
+                                    <div class="col border-end header_info">
+                                        <div style="max-width:max-content" class="border-bottom">Travaux</div>
+                                        <div>
+                                            <p/>
+                                        </div>
+                                    </div>
+                                    <div class="col border-end header_info">
+                                        <div style="max-width:max-content" class="border-bottom">N° DE SAV</div>
+                                        <div>
+                                            <p/>
+                                        </div>
+                                    </div>
+                                    <div class="col" style="white-space: nowrap;">
+                                        <div style="max-width:max-content">
+                                            <u>visa responsable technique:</u>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row p-2" style="background-color: #A0A0A0;">
+                                    <h5 style="text-align: center;">
+                                        <strong>RAPPORT D'INTERVENTION SAV<br/>DETECTION INCENDIE
+                                        </strong>
+                                    </h5>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- First Row -->
+                        <div class="row border-top custom_font">
+                            <div class="col-4">
+                                <div class="row justify-content-end custom_row">OUI
+                                    &amp;nbsp;&amp;nbsp;NON
+                                </div>
+                                <div class="row justify-content-end custom_row">
+                                    <span class="custom_row_header">
+                                        VISITE CURATIVE:
+                                    </span>
+                                    <span>
+                                        <input type="checkbox"/>
+                                    </span>
+                                    <span class="custom_row_input">
+                                        <input type="checkbox"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-end custom_row">OUI
+                                    &amp;nbsp;&amp;nbsp;NON
+                                </div>
+                                <div class="row justify-content-end custom_row">
+                                    <span class="custom_row_header">
+                                        VISITE PREVENTIVE:
+                                    </span>
+                                    <span>
+                                        <input type="checkbox"/>
+                                    </span>
+                                    <span class="custom_row_input">
+                                        <input type="checkbox"/>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-4">
+                                <div class="row justify-content-end custom_row">OUI
+                                    &amp;nbsp;&amp;nbsp;NON
+                                </div>
+                                <div class="row justify-content-end custom_row">
+                                    <span class="custom_row_header">
+                                        MODIFICATION:
+                                    </span>
+                                    <span>
+                                        <input type="checkbox"/>
+                                    </span>
+                                    <span class="custom_row_input">
+                                        <input type="checkbox"/>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second Row -->
+                        <div class="row border-top custom_font">
+                            <div class="col-4 custom_row2">
+                                <center>
+                                    TEMPS DE TRAJET: ___H___
+                                </center>
+                            </div>
+                            <div class="col-4 custom_row2">
+                                <center>
+                                    HEURE D'ARRIVÉE: ___H___
+                                </center>
+                            </div>
+                            <div class="col-4 custom_row2">
+                                <center>
+                                    HEURE DE DÉPART: ___H___
+                                </center>
+                            </div>
+                        </div>
+                        <!-- Third Row -->
+                        <div class="row border-top test-start custom_font13">
+                            ÉTAT DE L'INSTALLATION À L'ARRIVÉE ET RAPPORT DU
+                            CLIENT:........................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+
+                        </div>
+                        <!-- Forth Row -->
+                        <div class="row border-top custom_font13">
+                            <center>CONTRÔLE VISITE ENTRETIEN INCENDIE:</center>
+                        </div>
+                        <div class="row border-top"
+                             style="padding:5px;height: 10px;"/>
+                        <!-- Six Row -->
+                        <div class="row custom_font">
+                            <div class="col-4"/>
+                            <div class="col max_width">Bon</div>
+                            <div class="col max_width">mauvais</div>
+                            <div class="col max_width">s.o.</div>
+                            <div class="col-2"/>
+                            <div class="col-3"/>
+                        </div>
+                        <div class="row custom_font" style="padding:5px;">
+                            <div class="col-4">
+                                <p class="p_class">Contrôle des déclencheurs manuels:</p>
+                                <p class="p_class">Contrôle des détecteurs ioniques:</p>
+                                <p class="p_class">Contrôle des détecteurs optiques:</p>
+                                <p class="p_class">Contrôle des détecteurs thermiques:</p>
+                                <p class="p_class">Contrôle des détecteurs linéaires:</p>
+                                <p class="p_class">Contrôle des avertisseurs sonores:</p>
+                                <p class="p_class">Essais fonctionnel du système d'extinction:</p>
+                                <p class="p_class">Contrôle visuel de la tuyauterie et diffuseurs:</p>
+                                <p class="p_class">Contrôle visuel des conteneurs:</p>
+                                <p class="p_class">Relevés des pressions sur manomètres:</p>
+                                <p class="p_class">Contrôle des AES:</p>
+                                <p class="p_class">Contrôle du CMSI:</p>
+                                <p class="p_class">Contrôle de la centrale et alimentations:</p>
+                                <p class="p_class">Contrôle du transmetteur téléphonique:</p>
+                                <p class="p_class">Mesures et relevés:</p>
+                            </div>
+                            <div class="col-1">
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                            </div>
+                            <div class="col-1">
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                            </div>
+                            <div class="col-1">
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                                <p class="p_class">
+                                    <input type="checkbox"/>
+                                </p>
+                            </div>
+                            <div class="col-2" rowspan="15" style="padding-top:100px;">
+                                <center>Mesures et relevés:</center>
+                            </div>
+                            <div class="col-3" rowspan="15" style="padding-top:100px;">
+                                <p>I. installation: .............. mA</p>
+                                <p>U charge: ..................... V</p>
+                                <p>U batterie: ................... V</p>
+                            </div>
+                        </div>
+                        <!-- Seven Row -->
+                        <div class="row border-top test-start custom_font13">
+                            COMPTE RENDU D'INTERVENTION:
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                            ....................................................................................................................................................................................................................................................................................................................
+                        </div>
+                        <!-- Eight Row -->
+                        <div class="row border-top custom_font">
+                            <div style="  padding: 4px;">
+                                <span style="font-weight:bold;">MATERIEL FOURNI:</span>
+                                <span style="display: inline-block; border-bottom: 1px dotted black; width: 85%; margin-left: 5px;"/>
+                                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;
+                                <span style="display: inline-block; border-bottom: 1px dotted black; width: 85%; margin-left: 5px;"/>
+                            </div>
+
+                        </div>
+                        <!-- Footer  -->
+                        <div class="row border-top custom_font13">
+                            <div class="col-7 border-end">
+                                <p>
+                                    <strong>TECHNICIEN:</strong>
+                                </p>
+                                <br/>
+
+                                <p>
+                                    <strong>SIGNATURE DU TECHNICIEN:</strong>
+                                </p>
+                                <br/>
+                                <br/>
+                                <br/>
+                                <hr/>
+                                <p>
+                                    <strong>NOM DU SIGNATAIRE:</strong>
+                                </p>
+                                <br/>
+
+                                <p>
+                                    <strong>SIGNATURE ET CACHET DU CLIENT:</strong>
+                                </p>
+                                <br/>
+                                <br/>
+                                <br/>
+                            </div>
+                            <div class="col-5 ">
+                                <div class="row border-bottom">
+                                    <strong>FACTURATION N°:</strong>
+                                </div>
+                                <table class="table-borderless border-bottom" style="width:100%;">
+                                    <tr class="border-bottom">
+                                        <th class="border-end">
+                                            <strong>DÉSIGNATION:</strong>
+                                        </th>
+                                        <th class="border-end">
+                                            <strong>Qté:</strong>
+                                        </th>
+                                        <th class="border-end">
+                                            <strong>PU H.T.</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Total H.T.</strong>
+                                        </th>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">Forfait déplacement</td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">Trajet km:</td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">Temps de travail:</td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">Fournitures:</td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">
+                                            <p/>
+                                        </td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">
+                                            <p/>
+                                        </td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">
+                                            <p/>
+                                        </td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr class="border-bottom">
+                                        <td class="border-end">
+                                            <p/>
+                                        </td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="border-end">
+                                            <p/>
+                                        </td>
+                                        <td class="border-end"></td>
+                                        <td class="border-end"></td>
+                                        <td></td>
+                                    </tr>
+
+
+                                </table>
+                                <div class="row " style="height:120px;">
+                                    <div class="col-4">
+                                        <p class="p_class">Facture comptant</p>
+                                        <p class="p_class">A facturer</p>
+                                        <p class="p_class">Contrat</p>
+                                        <p class="p_class">S/ garantie</p>
+                                        <p class="p_class">Astreinte</p>
+                                    </div>
+                                    <div class="col-1 border-end">
+                                        <p class="p_class">
+                                            <input type="checkbox"/>
+                                        </p>
+                                        <p class="p_class">
+                                            <input type="checkbox"/>
+                                        </p>
+                                        <p class="p_class">
+                                            <input type="checkbox"/>
+                                        </p>
+                                        <p class="p_class">
+                                            <input type="checkbox"/>
+                                        </p>
+                                        <p class="p_class">
+                                            <input type="checkbox"/>
+                                        </p>
+                                    </div>
+                                    <div class="col-3 border-end">
+                                        <p class="p_class">Total H.T.:</p>
+                                        <hr style="margin: 0px"/>
+                                        <p class="p_class">TVA 20%:</p>
+                                        <p class="p_class">TVA 10%:</p>
+                                        <hr style="margin: 0px"/>
+                                        <p class="p_class pt-2">Total TTC:</p>
+                                    </div>
+                                    <div class="col-4 d-flex justify-content-end align-items-end">
+                                        <hr/>
+                                        <hr/>
+                                        <p class="p_class">tes 0131</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

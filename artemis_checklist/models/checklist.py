@@ -21,6 +21,7 @@ class ChecklistItemValue(models.Model):
     selection_value = fields.Selection([('good', 'Good'), ('n/a', 'N/A'), ('bad', 'Bad')])
     integer_value = fields.Integer()
     float_value = fields.Float()
+    char_value = fields.Char()
     checklist_id = fields.Many2one('fsm.checklist', string="Checklist")
 
     name = fields.Char()

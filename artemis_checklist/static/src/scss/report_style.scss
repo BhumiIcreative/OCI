@@ -1,0 +1,104 @@
+.custom_header2{
+    height:201px;
+    :first-child{
+        text-align:center;
+        vertical-align:top;
+        }
+    }
+.custom_header{
+    height:177px;
+    }
+.logo{
+    max-height:130px;
+    max-width:100px;
+    }
+.p_class{
+    margin :0px;
+    }
+.header_info{
+    white-space: nowrap;
+    padding:0px;
+    max-width:500px;
+    }
+.max_width{
+     max-width:max-content;
+    }
+.custom_font{
+    font-size:12px;
+    }
+.custom_font13{
+    font-size:13px;
+    }
+.custom_row{
+    padding-right:30px;
+    }
+.custom_row_header{
+    padding-right:17px;
+    }
+.custom_row2{
+    padding-left:50px;;
+    }
+.custom_row_input{
+    padding-left:20px;
+    }
+.custom_font15{
+    font-size:15px;
+    }
+.header{
+    background-color: #BEBEBE;
+    height:77px;
+    }
+.address{
+    display: flex;
+    flex-wrap: nowrap;
+    height:85px;
+    }
+.background_color{
+    background-color: #BEBEBE ! important;
+    width:250px;
+}
+.td-label {
+    background-color: #BEBEBE  ! important;
+    padding: 4px;
+    width: 20%; /* Label columns fixed width */
+    word-wrap: break-word;
+}
+.td-data {
+    padding: 4px;
+    width: 30%; /* Data columns fixed width */
+    word-wrap: break-word;
+}
+.td-highlight {
+   background-color: #BEBEBE;
+}
+.custom-table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    table-layout: fixed; /* Force fixed layout */
+}
+.custom-table td {
+    border: 1px solid black;
+    vertical-align: top;
+}
+.contract-table {
+    width: 100%;
+    border: 1px solid black;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.contract-table td {
+    border: 1px solid black;
+    vertical-align: middle;
+}
+.contract-td-label {
+   background-color: #BEBEBE ! important;
+    padding: 4px;
+    width: 20%;
+    word-wrap: break-word;
+}
+.contract-td-data {
+    padding: 4px;
+    width: 30%;
+    word-wrap: break-word;
+}

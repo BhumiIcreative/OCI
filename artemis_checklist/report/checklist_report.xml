@@ -1,0 +1,38 @@
+<odoo>
+    <record id="action_intervention_and_training" model="ir.actions.report">
+        <field name="name">Intervention and Training</field>
+        <field name="model">project.project</field>
+        <field name="binding_model_id" ref="project.model_project_project"/>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">artemis_checklist.intervention_and_training_report</field>
+        <field name="report_file">artemis_checklist.intervention_and_training_report</field>
+        <field name="paperformat_id" ref="artemis_checklist.paperformat_artemise_intervention"/>
+    </record>
+    <record id="action_sav_intervention" model="ir.actions.report">
+        <field name="name">SAV Intervention</field>
+        <field name="model">project.task</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">artemis_checklist.sav_intervention_report_template</field>
+        <field name="report_file">artemis_checklist.sav_intervention_report_template</field>
+        <field name="paperformat_id" ref="artemis_checklist.paperformat_artemise"/>
+    </record>
+    <record id="action_fire_detection" model="ir.actions.report">
+        <field name="name">Fire Detection</field>
+        <field name="model">project.task</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">artemis_checklist.fire_detection_report_template</field>
+        <field name="report_file">artemis_checklist.fire_detection_report_template</field>
+        <field name="paperformat_id" ref="artemis_checklist.paperformat_artemise"/>
+    </record>
+    <record id="action_intervention_preventive" model="ir.actions.report">
+        <field name="name">Intervention Report VE / Preventive Visit</field>
+        <field name="model">project.task</field>
+        <field name="binding_model_id" ref="project.model_project_task"/>
+        <field name="report_type">qweb-html</field>
+        <field name="report_name">artemis_checklist.intervention_preventive_report_template</field>
+        <field name="report_file">artemis_checklist.intervention_preventive_report_template</field>
+        <field name="paperformat_id" ref="artemis_checklist.paperformat_artemise"/>
+    </record>
+</odoo>

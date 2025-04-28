@@ -1,0 +1,12 @@
+<odoo>
+    <record id="artemis_checklists_inherit_view_partner_form" model="ir.ui.view">
+        <field name="name">artemis.checklists.inherit.view.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='category_id']" position="after">
+                <field name="contract_type"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

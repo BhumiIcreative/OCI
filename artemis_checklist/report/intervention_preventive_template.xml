@@ -1,0 +1,202 @@
+<odoo>
+    <template id="intervention_preventive_report_template">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <header>
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+                        <t t-if="not company">
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                <t t-set="company" t-value="o.company_id.sudo()"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>
+                        <!-- Header -->
+                        <div class="row">
+                            <div class="col-6">
+                                <img t-if="company.logo" class="o_company_logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                            </div>
+                            <div class="col-6 text-end" style="margin-bottom:0px;padding-bottom-0px;">
+                                <p class="p_class">Rapport d’intervention VE / Visite</p>
+                                <p class="p_class">préventive</p>
+                                <p class="p_class">N° Dossier : ART 0976</p>
+                            </div>
+                        </div>
+                    </header>
+                    <div class="page  mt-3">
+                        <!-- Table 1  -->
+                        <table class="table custom-table">
+                            <tr>
+                                <td class="td-label">Date d’intervention:</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.date_assign"/>
+                                </td>
+                                <td class="td-label">Client</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.partner_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Type d’intervention:</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.name"/>
+                                </td>
+                                <td class="td-label">Site</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.partner_id.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Technicien(s):</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.user_ids"/>
+                                </td>
+                                <td class="td-label">Adresse:</td>
+                                <td class="td-data td-highlight">
+                                    <span t-field="o.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["street", "street2", "zip", "city"], "no_marker": true}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">N° de SAV</td>
+                                <td class="td-data td-highlight">
+                                <!-- Left empty already developed by OCI -->
+                                <!--  <span t-field="o.sav_number"/>-->
+                                </td>
+                                <td class="td-label">Coordonnées:</td>
+                                <td class="td-data">
+                                    <span t-field="o.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["email", "phone", "mobile"], "no_marker": true}'/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="td-label">Etat de l’installation à l’arrivée du client:</td>
+                                <td class="td-data" colspan="3">
+                                    <span t-field="o.client_arrival"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- Table 2  -->
+                        <!-- Table 3  -->
+                        <table class="table contract-table">
+                            <tr>
+                                <td class="contract-td-label">Type de contrat</td>
+                                <td class="contract-td-data">
+                                    <!--                                    <span t-field="o.contract_type"/>-->
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="contract-td-label">N° Client</td>
+                                <td class="contract-td-data">
+                                    <!--                                    <span t-field="o.client_number"/>-->
+                                </td>
+                            </tr>
+                            <tr t-foreach="o.checklist_ids" t-as="checklist">
+                                <td class="contract-td-label">
+                                    <span class="p_class" t-field="checklist.name">
+                                    </span>
+                                </td>
+                                <td>
+                                    <span>☐</span>
+                                </td>
+                            </tr>
+                        </table>
+                        <!-- Table 4  -->
+                        <table class="table" t-foreach="o.checklist_ids" t-as="checklist">
+                            <tr>
+                                <td colspan="2" style="background-color:#7a7a7a;">
+                                    <span t-field="checklist.name"/>
+                                </td>
+                            </tr>
+                            <t t-foreach="o.visible_line_ids" t-as="line">
+                                <tr t-if="line.checklist_id.name == checklist.name and line.display_type == 'line_item'">
+                                    <td style="background-color:#E0E0E0 ! important; width: 40%;">
+                                        <span t-field="line.item_id.name"/>
+                                    </td>
+                                    <td t-if="line.valuefield_ttype == 'selection'">
+                                        <span t-field="line.selection_value"/>
+                                    </td>
+                                    <td t-elif="line.valuefield_ttype == 'integer'">
+                                        <span t-field="line.integer_value"/>
+                                    </td>
+                                    <td t-elif="line.valuefield_ttype == 'float'">
+                                        <span t-field="line.float_value"/>
+                                    </td>
+                                    <td t-elif="line.valuefield_ttype == 'char'">
+                                        <span t-field="line.char_value"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                        <!-- Table 5 -->
+                        <table class="table">
+                            <tr>
+                                <td class="background_color" style="width:300px;">
+                                    <p class="p_class">Compte rendu d'intervention</p>
+                                </td>
+                                <td>
+                                    <p class="p_class">Visite d'entretien ok. Remplacement batterie centrale (* de 5
+                                        ans)
+                                        Prévoir remplacement camera 7 ext cote gauche. Elle n’est plus étanche,
+                                        buée dans la camera. Camera hdcvi bullet.
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p class="p_class">Intervention terminée</p>
+                                </td>
+                                <td>
+                                    <p class="p_class">Oui</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p class="p_class">Suite SAV</p>
+                                </td>
+                                <td>
+                                    <p class="p_class">Non</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p class="p_class">Astreinte</p>
+                                </td>
+                                <td>
+                                    <p class="p_class">Non</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p class="p_class">Nom du signataire</p>
+                                </td>
+                                <td>
+                                    <p class="p_class">David</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p>Signature client</p>
+                                </td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td class="background_color" style="width:250px;">
+                                    <p>Signature du technicien</p>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </table>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

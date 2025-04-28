@@ -1,4 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-artemis_checklists.access_fsm_checklist,access_fsm_checklist,artemis_checklists.model_fsm_checklist,base.group_user,1,1,1,1
-artemis_checklists.access_fsm_checklist_item,access_fsm_checklist_item,artemis_checklists.model_fsm_checklist_item,base.group_user,1,1,1,1
-artemis_checklists.access_fsm_checklist_item_value,access_fsm_checklist_item_value,artemis_checklists.model_fsm_checklist_item_value,base.group_user,1,1,1,1

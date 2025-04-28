@@ -1,0 +1,445 @@
+<odoo>
+    <template id="intervention_and_training_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <div class="page border custom_font15">
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+                        <t t-if="not company">
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                <t t-set="company" t-value="o.company_id.sudo()"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>
+                        <!-- Header -->
+                        <div class="row custom_header2 ">
+                            <div class="col-3 border-end ">
+                                <img t-if="company.logo" class="o_company_logo  logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                                <br/>
+                                <br/>
+                                <div class="text-center small">
+                                    <span t-field="company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                    Tel:
+                                    <t t-esc="company.phone"/>
+                                    <br/>
+                                    Fax: 04 72 04 94 61
+                                </div>
+                            </div>
+                            <div class="col-9 ">
+                                <div class="row">
+                                    <div class="col-6 border-end p-2">
+                                        <span>
+                                            <strong>NOM DU CLIENT:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.name"/>
+                                    </div>
+                                    <div class="col-6 p-2">
+                                        <span>
+                                            <strong>DATE:</strong>
+                                        </span>
+                                        <t t-esc="o.date_start"/>
+                                    </div>
+                                </div>
+                                <div class="row border-top p-2 address">
+                                    <div class="col">
+                                        <span>ADRESSE:</span>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="row border-top p-2 pb-1 custom_font13 header">
+                                    <div class="col-3">
+                                        <p>PROCES VERBAL DE :</p>
+                                    </div>
+                                    <div class="col-9">
+                                        <p class="p_class">
+                                            <input type="checkbox"/>&amp;nbsp;&amp;nbsp;
+                                            MISE EN SERVICE
+                                        </p>
+                                        <p class="p_class">
+                                            <input type="checkbox"/>&amp;nbsp;&amp;nbsp;
+                                            RECEPTION
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second row-->
+                        <div class="row border-top ">
+                            <div class="col-4 pt-5 pb-2 border-end">
+                                <p>N° de DEVIS: ________________________</p>
+                            </div>
+                            <div class="col-4 pt-5 pb-2 border-end">
+                                <p>N° de CLIENT: _______________________</p>
+                            </div>
+                            <div class="col-4 text-center">
+                                <p>SIGNATURE DU RESPONSABLE DE SERVICE (Après retour dossier)</p>
+                            </div>
+                        </div>
+                        <!-- Third row  -->
+                        <div class="row border-top p-2">
+                            <div class="col-12 mb-2">
+                                <p class="mb-1">
+                                    CHANTIER RECEPTIONNE POUR ARTEMIS PAR:
+                                    <span style="border-bottom: 1px solid black; display: inline-block; width: 450px;"></span>
+                                </p>
+                                <p class="mb-1 pt-1">
+                                    CHANTIER RECEPTIONNE POUR LE CLIENT PAR:
+                                    <span style="border-bottom: 1px solid black; display: inline-block; width: 450px;"></span>
+                                </p>
+
+                            </div>
+
+                        </div>
+                        <!-- Forth row   -->
+                        <table class="table-borderless border-top w-100">
+                            <tr>
+                                <td>
+                                    <p>INSTALLATION DE:</p>
+                                </td>
+                                <td style="width:195px;">
+                                    <p>DETECTION IN TRUSION:</p>
+                                </td>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                                <td style="padding-left:15px;">
+                                    <p>DETECTION INCENDIE:</p>
+                                </td>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                                <td style="padding-left:15px;">
+                                    <p>SURVEILLANCE VIDEO:</p>
+                                </td>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <p>CONTROLE D'ACCES:</p>
+                                </td>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                                <td style="padding-left:15px;">
+                                    <p>PRODUITS ASSOCIES:</p>
+                                </td>
+                                <td>
+                                    <input type="checkbox"/>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </table>
+                        <!-- Fifth Row  -->
+                        <div class="row p-1 border-top">
+                            <div>
+                                <p style="margin: 0; padding: 0;text-align: center;">L'INSTALLATION EST
+                                    CONFORME
+                                    AU
+                                    DEVIS REFERENCE CI-DESSUS.
+                                </p>
+                                <p style="margin: 0; padding: 0;text-align: center;">LES ESSAIS FONCTIONNELS
+                                    ONT
+                                    ETE
+                                    REALISES.
+                                </p>
+                                <p style="margin: 0; padding: 0;text-align: center;">L'UTILISATEUR A ETE
+                                    INFORME
+                                    DE
+                                    SES OBLIGATIONS ET A RECU:
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row p-2 ">
+                            <table class="table-borderless w-100 p-2">
+                                <tr>
+                                    <td class="pr-5"></td>
+                                    <td>OUI</td>
+                                    <td>NON</td>
+                                    <td>S.O</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>LA NOTICE D'UTILISATION DES APPAREILLAGES:</p>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>LE DOSSIER TECHNIQUE:</p>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>LA PROPOSITION D'UN CONTRAT D'ENTRETIEN:</p>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>LE CARNET D'ENTRETIEN:</p>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>AGREMENT @CYBER NIVEAU 3:</p>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5">
+                                        <p>ARCHITECTURE CYBER DE L'INSTALLATION:</p>
+                                    </td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>NIVEAU</td>
+                                    <td>1</td>
+                                    <td>2</td>
+                                    <td>3</td>
+                                    <td>4</td>
+                                </tr>
+                                <tr>
+                                    <td class="pr-5"></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                    <td>
+                                        <input type="checkbox"/>
+                                    </td>
+                                </tr>
+
+                            </table>
+                        </div>
+                        <div class="row border-top pb-3">
+                            <p>LA GARANTIE TEL QUE SPECIFIEE DANS LES CONDITIONS DE VENTE DE L'INSTALLATEUR PREND EFFET
+                                A COMPTER DU:
+                            </p>
+                        </div>
+                        <div class="row  border-top ">
+                            <div class="col-6  border-end pb-5">
+                                <p>FAIT A:</p>
+                                <br/>
+
+                                <p>LE:</p>
+                                <br/>
+                            </div>
+                            <div class="col-6 ">
+                                <p>SIGNATURE DE L'INSTALLATEUR:</p>
+                            </div>
+                        </div>
+                        <div class="row  border-top ">
+                            <div class="col-6  border-end" style="height:200px;">
+                                <p>OBSERVATION:</p>
+                            </div>
+                            <div class="col-6">
+                                <p>SIGNATURE DU CLIENT:</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="page border custom_font15" style="page-break-before:always;">
+                        <t t-if="not o" t-set="o" t-value="doc"/>
+                        <t t-if="not company">
+                            <t t-if="company_id">
+                                <t t-set="company" t-value="company_id"/>
+                            </t>
+                            <t t-elif="o and 'company_id' in o and o.company_id.sudo()">
+                                <t t-set="company" t-value="o.company_id.sudo()"/>
+                            </t>
+                            <t t-else="else">
+                                <t t-set="company" t-value="res_company"/>
+                            </t>
+                        </t>
+                        <!-- Header -->
+                        <div class="row custom_header2 ">
+                            <div class="col-3 border-end ">
+                                <img t-if="company.logo" class="o_company_logo  logo"
+                                     t-att-src="image_data_uri(company.logo)"
+                                     alt="Logo"/>
+                                <br/>
+                                <br/>
+                                <div class="text-center small">
+                                    <span t-field="company.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+                                    Tel:
+                                    <t t-esc="company.phone"/>
+                                    <br/>
+                                    Fax: 04 72 04 94 61
+                                </div>
+                            </div>
+                            <div class="col-9 ">
+                                <div class="row">
+                                    <div class="col-6 border-end p-2">
+                                        <span>
+                                            <strong>NOM DU CLIENT:</strong>
+                                        </span>
+                                        <t t-esc="o.partner_id.name"/>
+                                    </div>
+                                    <div class="col-6 p-2">
+                                        <span>
+                                            <strong>DATE:</strong>
+                                        </span>
+                                        <t t-esc="o.date_start"/>
+                                    </div>
+                                </div>
+                                <div class="row border-top p-2 address">
+                                    <div class="col">
+                                        <span>ADRESSE:</span>
+                                        <br/>
+                                    </div>
+                                </div>
+                                <div class="row border-top p-3 pb-1 custom_font13 header">
+                                    <div class="col-12 text-start">
+                                        <h4>
+                                            <strong>
+                                                <center>PROCES VERBAL DE FORMATION</center>
+                                            </strong>
+                                        </h4>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Second row-->
+                        <div class="row border-top ">
+
+                            <div class="col-6 pt-5 pb-2 border-end">
+                                <p>N° de CLIENT: ___________________________________________</p>
+                            </div>
+                            <div class="col-6">
+                                <p>SIGNATURE DU RESPONSABLE DE SERVICE (Après retour dossier)</p>
+                            </div>
+                        </div>
+                        <!-- Third Row -->
+                        <div class="row border-top p-2 fw-bold">
+                            <p>FORMATION EFFECTUEE POUR ARTEMIS PAR :</p>
+                        </div>
+                        <!-- Forth Row -->
+                        <div class="row border-top p-2 fw-bold">
+                            <h4>
+                                <center>INSTALLATION DE</center>
+                            </h4>
+                        </div>
+                        <!-- Fifth Row -->
+                        <div class="row border-top p-1 text-center">
+                            <p>LES PERSONNES MENTIONNEES CI-DESSOUS ATTESTENT AVOIR REÇU UNE FORMATION SUR
+                                L’EXPLOITATION DU SYSTÈME DE SÉCURITÉ EN DATE DU :
+                            </p>
+                        </div>
+                        <!-- Sixth Row -->
+                        <div class="row border-top ">
+                            <div class="col-6 border-end">
+                                <div class="text-center">
+                                    NOMS DES PERSONNES FORMÉES
+                                </div>
+                                <div class="border-top" style="height:740px;">
+                                    <p/>
+                                </div>
+                            </div>
+                            <div class="col-6 ">
+                                <div class="text-center">
+                                    SIGNATURE
+                                </div>
+                                <div class="border-top">
+                                    <p/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>
