@@ -19,12 +19,11 @@
                         <!-- Header -->
                         <div class="row custom_header">
                             <div class="col-3 border-end custom_font" style="text-align:center; vertical-align:top;">
-                                <img t-if="company.logo" class="o_company_logo  logo"
+                                <img t-if="company.logo" class="o_company_logo" style="max-height:80px;max-width:80px;"
                                      t-att-src="image_data_uri(company.logo)"
                                      alt="Logo"/>
-                                <br/>
-                                <br/>
-                                <div class="text-center small">
+
+                                <div class="text-center " style="font-size:10px;">
                                     <span t-field="company.partner_id"
                                           t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
                                     Tel:
@@ -45,7 +44,9 @@
                                         <span>
                                             <strong>DATE:</strong>
                                         </span>
-                                        <t t-esc="o.planned_date_begin.date()"/>
+                                        <t t-if="o.planned_date_begin">
+                                            <t t-esc="o.planned_date_begin.date()"/>
+                                        </t>
                                     </div>
                                 </div>
                                 <div class="row" style="padding:8px 8px 8px 30px; ">
@@ -120,7 +121,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row p-2" style="background-color: #A0A0A0;">
+                                <div class="row p-2 border-top" style="background-color: #A0A0A0;">
                                     <h5 style="text-align: center;">
                                         <strong>RAPPORT D'INTERVENTION SAV
                                         </strong>
@@ -130,19 +131,19 @@
                         </div>
                         <!-- First Row -->
                         <div class="row custom_font border-top p-2">
-                            <div class="col-3">0
+                            <div class="col-3">
                                 <strong>DÉTECTION INTRUSION:</strong>
                                 <input type="checkbox"/>
                             </div>
-                            <div class="col-3">0
+                            <div class="col-3">
                                 <strong>SURVEILLANCE VIDÉO:</strong>
                                 <input type="checkbox"/>
                             </div>
-                            <div class="col-3">0
+                            <div class="col-3">
                                 <strong>CONTRÔLE D'ACCÈS:</strong>
                                 <input type="checkbox"/>
                             </div>
-                            <div class="col-3">0
+                            <div class="col-3">
                                 <strong>PRODUITS ASSOCIÉS:</strong>
                                 <input type="checkbox"/>
                             </div>
@@ -156,11 +157,11 @@
                                 <div class="row justify-content-end custom_row">
                                     <span class="custom_row_header">
                                         VISITE CURATIVE:
-                                    </span>0
+                                    </span>
                                     <span>
                                         <input type="checkbox"/>
                                     </span>
-                                    0
+
                                     <span class="custom_row_input">
                                         <input type="checkbox"/>
                                     </span>
@@ -173,11 +174,11 @@
                                 <div class="row justify-content-end custom_row">
                                     <span class="custom_row_header">
                                         VISITE PREVENTIVE:
-                                    </span>0
+                                    </span>
                                     <span>
                                         <input type="checkbox"/>
                                     </span>
-                                    0
+
                                     <span class="custom_row_input">
                                         <input type="checkbox"/>
                                     </span>
@@ -190,11 +191,11 @@
                                 <div class="row justify-content-end custom_row">
                                     <span class="custom_row_header">
                                         MODIFICATION:
-                                    </span>0
+                                    </span>
                                     <span>
                                         <input type="checkbox"/>
                                     </span>
-                                    0
+
                                     <span class="custom_row_input">
                                         <input type="checkbox"/>
                                     </span>
@@ -708,7 +709,7 @@
 
                                 </table>
                                 <div class="row border-top ">
-                                    <span>CONTROLE VISITE ENTRETIEN VIDEO :</span>
+                                    <p>CONTROLE VISITE ENTRETIEN VIDEO</p>
                                 </div>
                                 <table class="table-borderless w-100 border-top">
                                     <tr class="text-start">
@@ -838,9 +839,7 @@
                         <!-- Six Row  -->
                         <div class="row border-top custom_font">
                             <div class="col-12 p-2">
-                                <strong>
-                                    <u>COMPTE RENDU D'INTERVENTION:</u>
-                                </strong>&amp;nbsp;&amp;nbsp;&amp;nbsp;.....................................................................................................................................................................
+                                <strong>COMPTE RENDU D'INTERVENTION:</strong>&amp;nbsp;&amp;nbsp;&amp;nbsp;.....................................................................................................................................................................
                                 <div style="flex: 1; border-bottom: 1px dotted black; height: 20px;"></div>
                                 <div style="flex: 1; border-bottom: 1px dotted black; height: 20px;"></div>
                                 <div style="flex: 1; border-bottom: 1px dotted black; height: 20px;"></div>
@@ -851,8 +850,8 @@
                                 <div style="flex: 1; border-bottom: 1px dotted black; height: 20px;"></div>
                             </div>
                         </div>
-                         <!-- Eight Row -->
-                        <div class="row custom_font">
+                        <!-- Eight Row -->
+                        <div class="row custom_font border-top">
                             <div style="padding: 4px;">
                                 <span style="font-weight:bold;">MATERIEL FOURNI:</span>
                                 <span style="display: inline-block; border-bottom: 1px dotted black; width: 85%; margin-left: 5px;"/>

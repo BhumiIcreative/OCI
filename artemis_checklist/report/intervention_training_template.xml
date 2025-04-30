@@ -3,7 +3,7 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.basic_layout">
-                    <div class="page border custom_font15">
+                    <div class="page border" style="font-size:15px;">
                         <t t-if="not o" t-set="o" t-value="doc"/>
                         <t t-if="not company">
                             <t t-if="company_id">
@@ -17,14 +17,14 @@
                             </t>
                         </t>
                         <!-- Header -->
-                        <div class="row custom_header2 ">
-                            <div class="col-3 border-end ">
-                                <img t-if="company.logo" class="o_company_logo  logo"
+                        <div class="row" style="height:201px;">
+                            <div class="col-3 border-end " style="text-align:center; vertical-align:top;">
+                                <img t-if="company.logo" class="o_company_logo pt-1"
+                                     style="max-height:100px;max-width:100px;"
                                      t-att-src="image_data_uri(company.logo)"
                                      alt="Logo"/>
-                                <br/>
-                                <br/>
-                                <div class="text-center small">
+
+                                <div class="text-center" style="font-size:11px;">
                                     <span t-field="company.partner_id"
                                           t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
                                     Tel:
@@ -37,35 +37,42 @@
                                 <div class="row">
                                     <div class="col-6 border-end p-2">
                                         <span>
-                                            <strong>NOM DU CLIENT:</strong>
+                                            NOM DU CLIENT:
                                         </span>
                                         <t t-esc="o.partner_id.name"/>
                                     </div>
                                     <div class="col-6 p-2">
                                         <span>
-                                            <strong>DATE:</strong>
+                                            DATE:
                                         </span>
                                         <t t-esc="o.date_start"/>
                                     </div>
                                 </div>
                                 <div class="row border-top p-2 address">
-                                    <div class="col">
-                                        <span>ADRESSE:</span>
-                                        <br/>
+                                    <div class="col-2">
+                                        <p>ADRESSE:</p>
+                                    </div>
+                                    <div class="col text-start">
+                                         <span t-field="o.partner_id"
+                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+
                                     </div>
                                 </div>
-                                <div class="row border-top p-2 pb-1 custom_font13 header">
+                                <div class="row border-top p-2 pb-1 custom_font13"
+                                     style=" background-color: #BEBEBE;height:78px;">
                                     <div class="col-3">
-                                        <p>PROCES VERBAL DE :</p>
+                                        <p>
+                                            <strong>PROCES VERBAL DE :</strong>
+                                        </p>
                                     </div>
                                     <div class="col-9">
                                         <p class="p_class">
                                             <input type="checkbox"/>&amp;nbsp;&amp;nbsp;
-                                            MISE EN SERVICE
+                                            <strong>MISE EN SERVICE</strong>
                                         </p>
                                         <p class="p_class">
                                             <input type="checkbox"/>&amp;nbsp;&amp;nbsp;
-                                            RECEPTION
+                                            <strong>RECEPTION</strong>
                                         </p>
                                     </div>
                                 </div>
@@ -74,12 +81,14 @@
                         <!-- Second row-->
                         <div class="row border-top ">
                             <div class="col-4 pt-5 pb-2 border-end">
-                                <p>N° de DEVIS: ________________________</p>
+                                <p>N° de DEVIS:
+                                    <t t-esc="o.sale_order_id.name"/>
+                                </p>
                             </div>
-                            <div class="col-4 pt-5 pb-2 border-end">
+                            <div class="col-4 pt-5 pb-2 border-end ps-2">
                                 <p>N° de CLIENT: _______________________</p>
                             </div>
-                            <div class="col-4 text-center">
+                            <div class="col-4 text-center ps-2">
                                 <p>SIGNATURE DU RESPONSABLE DE SERVICE (Après retour dossier)</p>
                             </div>
                         </div>
@@ -87,11 +96,11 @@
                         <div class="row border-top p-2">
                             <div class="col-12 mb-2">
                                 <p class="mb-1">
-                                    CHANTIER RECEPTIONNE POUR ARTEMIS PAR:
+                                    <strong>CHANTIER RECEPTIONNE POUR ARTEMIS PAR:</strong>
                                     <span style="border-bottom: 1px solid black; display: inline-block; width: 450px;"></span>
                                 </p>
                                 <p class="mb-1 pt-1">
-                                    CHANTIER RECEPTIONNE POUR LE CLIENT PAR:
+                                    <strong>CHANTIER RECEPTIONNE POUR LE CLIENT PAR:</strong>
                                     <span style="border-bottom: 1px solid black; display: inline-block; width: 450px;"></span>
                                 </p>
 
@@ -102,7 +111,7 @@
                         <table class="table-borderless border-top w-100">
                             <tr>
                                 <td>
-                                    <p>INSTALLATION DE:</p>
+                                    <p class="ps-2">INSTALLATION DE:</p>
                                 </td>
                                 <td style="width:195px;">
                                     <p>DETECTION IN TRUSION:</p>
@@ -144,21 +153,23 @@
                         <!-- Fifth Row  -->
                         <div class="row p-1 border-top">
                             <div>
-                                <p style="margin: 0; padding: 0;text-align: center;">L'INSTALLATION EST
-                                    CONFORME
-                                    AU
-                                    DEVIS REFERENCE CI-DESSUS.
-                                </p>
-                                <p style="margin: 0; padding: 0;text-align: center;">LES ESSAIS FONCTIONNELS
-                                    ONT
-                                    ETE
-                                    REALISES.
-                                </p>
-                                <p style="margin: 0; padding: 0;text-align: center;">L'UTILISATEUR A ETE
-                                    INFORME
-                                    DE
-                                    SES OBLIGATIONS ET A RECU:
-                                </p>
+                                <strong>
+                                    <p style="margin: 0; padding: 0;text-align: center;">L'INSTALLATION EST
+                                        CONFORME
+                                        AU
+                                        DEVIS REFERENCE CI-DESSUS.
+                                    </p>
+                                    <p style="margin: 0; padding: 0;text-align: center;">LES ESSAIS FONCTIONNELS
+                                        ONT
+                                        ETE
+                                        REALISES.
+                                    </p>
+                                    <p style="margin: 0; padding: 0;text-align: center;">L'UTILISATEUR A ETE
+                                        INFORME
+                                        DE
+                                        SES OBLIGATIONS ET A RECU:
+                                    </p>
+                                </strong>
                             </div>
                         </div>
                         <div class="row p-2 ">
@@ -304,33 +315,33 @@
 
                             </table>
                         </div>
-                        <div class="row border-top pb-3">
+                        <div class="row border-top pb-3 ps-2">
                             <p>LA GARANTIE TEL QUE SPECIFIEE DANS LES CONDITIONS DE VENTE DE L'INSTALLATEUR PREND EFFET
                                 A COMPTER DU:
                             </p>
                         </div>
                         <div class="row  border-top ">
                             <div class="col-6  border-end pb-5">
-                                <p>FAIT A:</p>
+                                <p class="ps-2">FAIT A:</p>
                                 <br/>
 
-                                <p>LE:</p>
+                                <p class="ps-2">LE:</p>
                                 <br/>
                             </div>
                             <div class="col-6 ">
-                                <p>SIGNATURE DE L'INSTALLATEUR:</p>
+                                <p class="ps-2">SIGNATURE DE L'INSTALLATEUR:</p>
                             </div>
                         </div>
                         <div class="row  border-top ">
                             <div class="col-6  border-end" style="height:200px;">
-                                <p>OBSERVATION:</p>
+                                <p class="ps-2">OBSERVATION:</p>
                             </div>
                             <div class="col-6">
-                                <p>SIGNATURE DU CLIENT:</p>
+                                <p class="ps-2">SIGNATURE DU CLIENT:</p>
                             </div>
                         </div>
                     </div>
-                    <div class="page border custom_font15" style="page-break-before:always;">
+                    <div class="page border " style="page-break-before:always;font-size:15px;">
                         <t t-if="not o" t-set="o" t-value="doc"/>
                         <t t-if="not company">
                             <t t-if="company_id">
@@ -344,14 +355,14 @@
                             </t>
                         </t>
                         <!-- Header -->
-                        <div class="row custom_header2 ">
-                            <div class="col-3 border-end ">
-                                <img t-if="company.logo" class="o_company_logo  logo"
+                        <div class="row" style="height:201px;">
+                            <div class="col-3 border-end " style="text-align:center; vertical-align:top;">
+                                <img t-if="company.logo" class="o_company_logo pt-1"
+                                     style="max-height:100px;max-width:100px;"
                                      t-att-src="image_data_uri(company.logo)"
                                      alt="Logo"/>
-                                <br/>
-                                <br/>
-                                <div class="text-center small">
+
+                                <div class="text-center" style="font-size:11px;">
                                     <span t-field="company.partner_id"
                                           t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
                                     Tel:
@@ -364,24 +375,29 @@
                                 <div class="row">
                                     <div class="col-6 border-end p-2">
                                         <span>
-                                            <strong>NOM DU CLIENT:</strong>
+                                            NOM DU CLIENT:
                                         </span>
                                         <t t-esc="o.partner_id.name"/>
                                     </div>
                                     <div class="col-6 p-2">
                                         <span>
-                                            <strong>DATE:</strong>
+                                            DATE:
                                         </span>
                                         <t t-esc="o.date_start"/>
                                     </div>
                                 </div>
                                 <div class="row border-top p-2 address">
-                                    <div class="col">
-                                        <span>ADRESSE:</span>
-                                        <br/>
+                                    <div class="col-2">
+                                        <p>ADRESSE:</p>
+                                    </div>
+                                    <div class="col text-start">
+                                         <span t-field="o.partner_id"
+                                              t-options='{"widget": "contact", "fields": ["address"], "no_marker": true}'/>
+
                                     </div>
                                 </div>
-                                <div class="row border-top p-3 pb-1 custom_font13 header">
+                                <div class="row border-top p-3 pb-1 custom_font13 "
+                                     style=" background-color: #BEBEBE;height:78px;">
                                     <div class="col-12 text-start">
                                         <h4>
                                             <strong>
@@ -392,10 +408,11 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Second row-->
                         <div class="row border-top ">
 
-                            <div class="col-6 pt-5 pb-2 border-end">
+                            <div class="col-6 pt-5 pb-2 border-end ps-2">
                                 <p>N° de CLIENT: ___________________________________________</p>
                             </div>
                             <div class="col-6">
@@ -409,7 +426,9 @@
                         <!-- Forth Row -->
                         <div class="row border-top p-2 fw-bold">
                             <h4>
-                                <center>INSTALLATION DE</center>
+                                <center>
+                                    <strong>INSTALLATION DE</strong>
+                                </center>
                             </h4>
                         </div>
                         <!-- Fifth Row -->

@@ -20,9 +20,6 @@
     padding:0px;
     max-width:500px;
     }
-.max_width{
-     max-width:max-content;
-    }
 .custom_font{
     font-size:12px;
     }
@@ -41,13 +38,6 @@
 .custom_row_input{
     padding-left:20px;
     }
-.custom_font15{
-    font-size:15px;
-    }
-.header{
-    background-color: #BEBEBE;
-    height:77px;
-    }
 .address{
     display: flex;
     flex-wrap: nowrap;
@@ -55,7 +45,6 @@
     }
 .background_color{
     background-color: #BEBEBE ! important;
-    width:250px;
 }
 .td-label {
     background-color: #BEBEBE  ! important;
